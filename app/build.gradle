@@ -43,6 +43,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "androidx.room:room-runtime:2.x.x"  // replace 2.x.x with the latest version
+    annotationProcessor "androidx.room:room-compiler:2.x.x"  // replace 2.x.x with the latest version
+    implementation 'com.android.volley:volley:1.2.1'  // Volley for network requests
+    implementation 'com.github.bumptech.glide:glide:4.12.0'  // Glide for image handling
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
