@@ -12,11 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
     private List<ImageEntity> imageList;
+    private ImageEntity backupImage;
+    private int backupPosition;
 
     public ImageAdapter(List<ImageEntity> imageList) {
         this.imageList = imageList;
@@ -32,8 +35,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageEntity image = imageList.get(position);
-     //   holder.textWidth.setText("Width: " + image.getWidth());
-     //   holder.textHeight.setText("Height: " + image.getHeight());
+        // Uncomment these if you want to display the width and height
+        // holder.textWidth.setText("Width: " + image.getWidth());
+        // holder.textHeight.setText("Height: " + image.getHeight());
         Glide.with(holder.imageView.getContext()).load(image.getUrl()).into(holder.imageView);
 
         // Delete button click listener
@@ -43,32 +47,35 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                     .setTitle(R.string.delete_confirmation_title)
                     .setMessage(R.string.delete_confirmation_message)
                     .setPositiveButton(R.string.delete_confirmation_positive_button, (dialog, which) -> {
+                        // Backup the image for potential UNDO
+                        backupImage = image;
+                        backupPosition = position;
+
                         // Delete from local list
                         imageList.remove(position);
                         notifyItemRemoved(position);
 
-                        // Delete from database (better to handle this in a background task)
-                        // NOTE: Ensure you have already implemented the async task for deleting from the database.
+                        // Delete from database
                         new DeleteImageTask(AppDatabase.getDatabase(v.getContext()).imageDao()).execute(image);
+
+                        Snackbar.make(v, "Image deleted", Snackbar.LENGTH_LONG)
+                                .setAction("UNDO", view -> {
+                                    imageList.add(backupPosition, backupImage);
+                                    notifyItemInserted(backupPosition);
+                                    // Optionally: Re-insert the image into the database
+                                }).show();
                     })
                     .setNegativeButton(R.string.delete_confirmation_negative_button, null)
                     .show();
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ImageDetailsActivity.class);
-                intent.putExtra("imageURL", image.getUrl());
-                intent.putExtra("imageWidth", image.getWidth());
-                intent.putExtra("imageHeight", image.getHeight());
-                v.getContext().startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ImageDetailsActivity.class);
+            intent.putExtra("imageURL", image.getUrl());
+            intent.putExtra("imageWidth", image.getWidth());
+            intent.putExtra("imageHeight", image.getHeight());
+            v.getContext().startActivity(intent);
         });
-
-
-
-
     }
 
     @Override
@@ -76,7 +83,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         return imageList.size();
     }
 
-    // Update the list of images and notify the adapter
     public void setImageList(List<ImageEntity> newImageList) {
         imageList = newImageList;
         notifyDataSetChanged();
@@ -97,7 +103,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         }
     }
 
-    // Nested static class for async task
     private static class DeleteImageTask extends AsyncTask<ImageEntity, Void, Void> {
         private ImageDao imageDao;
 
