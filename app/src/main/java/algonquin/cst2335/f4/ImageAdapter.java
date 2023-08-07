@@ -1,5 +1,6 @@
 package algonquin.cst2335.f4;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             AppDatabase database = AppDatabase.getDatabase(v.getContext());
             new DeleteImageTask(database.imageDao()).execute(image);
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ImageDetailsActivity.class);
+                intent.putExtra("imageURL", image.getUrl());
+                intent.putExtra("imageWidth", image.getWidth());
+                intent.putExtra("imageHeight", image.getHeight());
+                v.getContext().startActivity(intent);
+            }
+        });
+
+
+
+
     }
 
     @Override
