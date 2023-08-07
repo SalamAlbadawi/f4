@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".ImageActivity"></activity>
         <activity android:name=".SavedImagesActivity"></activity>
+        <activity android:name=".ImageDisplayActivity" />
+
     </application>
 
 </manifest>

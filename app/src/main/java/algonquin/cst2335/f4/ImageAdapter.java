@@ -5,12 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
@@ -46,6 +43,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         return imageList.size();
     }
 
+    // This method should be inside the main ImageAdapter class and not in ViewHolder.
+    public void setImageList(List<ImageEntity> newImageList) {
+        imageList = newImageList;
+        notifyDataSetChanged();
+    }
+
     // ViewHolder class to hold references to views in the list item layout
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
@@ -58,11 +61,5 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             textWidth = itemView.findViewById(R.id.textWidth);
             textHeight = itemView.findViewById(R.id.textHeight);
         }
-    }
-
-    // Method to update the adapter with a new list of images
-    public void setImageList(List<ImageEntity> newImageList) {
-        imageList = newImageList;
-        notifyDataSetChanged();
     }
 }
