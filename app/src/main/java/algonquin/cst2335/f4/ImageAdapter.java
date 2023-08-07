@@ -1,5 +1,6 @@
 package algonquin.cst2335.f4;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -31,19 +32,27 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageEntity image = imageList.get(position);
-        holder.textWidth.setText("Width: " + image.getWidth());
-        holder.textHeight.setText("Height: " + image.getHeight());
+     //   holder.textWidth.setText("Width: " + image.getWidth());
+     //   holder.textHeight.setText("Height: " + image.getHeight());
         Glide.with(holder.imageView.getContext()).load(image.getUrl()).into(holder.imageView);
 
         // Delete button click listener
         holder.deleteButton.setOnClickListener(v -> {
-            // Delete from local list
-            imageList.remove(position);
-            notifyItemRemoved(position);
+            // Create and show the confirmation dialog
+            new AlertDialog.Builder(v.getContext())
+                    .setTitle(R.string.delete_confirmation_title)
+                    .setMessage(R.string.delete_confirmation_message)
+                    .setPositiveButton(R.string.delete_confirmation_positive_button, (dialog, which) -> {
+                        // Delete from local list
+                        imageList.remove(position);
+                        notifyItemRemoved(position);
 
-            // Delete from database using the async task
-            AppDatabase database = AppDatabase.getDatabase(v.getContext());
-            new DeleteImageTask(database.imageDao()).execute(image);
+                        // Delete from database (better to handle this in a background task)
+                        // NOTE: Ensure you have already implemented the async task for deleting from the database.
+                        new DeleteImageTask(AppDatabase.getDatabase(v.getContext()).imageDao()).execute(image);
+                    })
+                    .setNegativeButton(R.string.delete_confirmation_negative_button, null)
+                    .show();
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
