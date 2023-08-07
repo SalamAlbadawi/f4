@@ -2,6 +2,7 @@ package algonquin.cst2335.f4;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 public class ImageActivity extends AppCompatActivity {
-
-    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class ImageActivity extends AppCompatActivity {
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // Save the image to the database in the background
-                            new SaveImageTask().execute(imageUrl);
+                            new SaveImageTask(AppDatabase.getDatabase(ImageActivity.this)).execute(imageUrl);
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -59,16 +58,23 @@ public class ImageActivity extends AppCompatActivity {
 
         Button showListButton = findViewById(R.id.showListButton);
         showListButton.setOnClickListener(v -> {
-            // Logic to show list
+            // Logic to navigate to the activity that shows the list of saved images
+            Intent intent = new Intent(ImageActivity.this, SavedImagesActivity.class);
+            startActivity(intent);
         });
     }
 
     private class SaveImageTask extends AsyncTask<String, Void, Long> {
+        private AppDatabase appDatabase;
+
+
+        public SaveImageTask(AppDatabase appDatabase) {
+            this.appDatabase = appDatabase;
+        }
 
         @Override
         protected Long doInBackground(String... params) {
             String imageUrl = params[0];
-            appDatabase = AppDatabase.getDatabase(ImageActivity.this);
 
             Bitmap imageBitmap = downloadImage(imageUrl); // Download the image using Glide
             int width = 0;

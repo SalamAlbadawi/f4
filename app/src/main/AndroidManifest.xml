@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ImageActivity"></activity>
+        <activity android:name=".SavedImagesActivity"></activity>
     </application>
 
 </manifest>
