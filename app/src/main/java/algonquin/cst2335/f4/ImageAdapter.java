@@ -35,9 +35,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageEntity image = imageList.get(position);
-        // Uncomment these if you want to display the width and height
-        // holder.textWidth.setText("Width: " + image.getWidth());
-        // holder.textHeight.setText("Height: " + image.getHeight());
+        /// Check if item is expanded
+
+
         Glide.with(holder.imageView.getContext()).load(image.getUrl()).into(holder.imageView);
 
         // Delete button click listener

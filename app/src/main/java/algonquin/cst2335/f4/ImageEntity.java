@@ -32,7 +32,8 @@ public class ImageEntity {
     }
 
     // Constructors
-    public ImageEntity() {}
+    public ImageEntity() {
+    }
 
     public ImageEntity(int height, int width, String url, String path) {
         this.height = height;
@@ -82,4 +83,6 @@ public class ImageEntity {
     public void setPath(String path) {
         this.path = path;
     }
+
+
 }
