@@ -1,14 +1,18 @@
 package algonquin.cst2335.f4;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,9 +41,40 @@ public class MainActivity extends AppCompatActivity {
         generateImageButton = findViewById(R.id.generateImageButton);
         imageView = findViewById(R.id.imageView);
 
-        generateImageButton.setOnClickListener(v -> {
-            // TODO: Implement the logic to generate the image based on width and height
+        generateImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Fetch the user's specified width and height values from the EditText
+                String widthString = widthEditText.getText().toString().trim();
+                String heightString = heightEditText.getText().toString().trim();
+
+                // Try to parse the width and height values from the EditTexts into integers
+                int width, height;
+                try {
+                    width = Integer.parseInt(widthString);
+                    height = Integer.parseInt(heightString);
+                } catch (NumberFormatException e) {
+                    // If there's an error (e.g., the user didn't enter a number or left an EditText empty),
+                    // show a toast notification to alert them and exit the method early
+                    Toast.makeText(MainActivity.this, "Please enter valid numbers.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Construct the URL for generating the image using the Placebear API
+                String imageUrl = "https://placebear.com/" + width + "/" + height;
+
+                // Create an Intent to navigate to ImageActivity
+                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+
+                // Pass the imageUrl as an extra to ImageActivity so it knows which image to display
+                intent.putExtra("IMAGE_URL", imageUrl);
+
+                // Start the ImageActivity
+                startActivity(intent);
+            }
         });
+
 
         widthEditText.addTextChangedListener(new TextWatcher() {
             @Override
