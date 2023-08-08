@@ -116,14 +116,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_delete) {
-            // TODO: Implement the delete logic
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
+
 
     @Override
     protected void onPause() {

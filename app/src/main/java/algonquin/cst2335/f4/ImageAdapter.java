@@ -97,8 +97,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
-            textWidth = itemView.findViewById(R.id.textWidth);
-            textHeight = itemView.findViewById(R.id.textHeight);
+           // textWidth = itemView.findViewById(R.id.textWidth);
+          //  textHeight = itemView.findViewById(R.id.textHeight);
             deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
