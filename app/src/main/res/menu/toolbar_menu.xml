@@ -1,36 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/help_view"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="salam"
-        app:showAsAction="always" />
+        android:icon="@drawable/bear4"
+        android:title="Help"
+        app:showAsAction="" />
     <item
-        android:id="@+id/home_view"
+        android:id="@+id/about_view"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="salam"
-        app:showAsAction="always|withText" />
+        android:title="About"
+        app:showAsAction="" />
+    <!-- res/menu/toolbar_menu2.xml -->
+
     <item
-        android:id="@+id/carbon_view"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="dss"
-        app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/covid19_view"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="salam"
-        app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/dictionary_view"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="salam"
-        app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/pexels_view"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="salam"
-        app:showAsAction="always|withText" />
+        android:id="@+id/showListButton"
+        android:title="Show List"
+        app:showAsAction="" />
+
+
+
+
 </menu>

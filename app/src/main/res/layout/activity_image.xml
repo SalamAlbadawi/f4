@@ -8,75 +8,78 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/imageToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/Azure"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Image Activity" />
 
 
         <!-- ... Existing code ... -->
+
+
     <View
         android:id="@+id/whiteFrame"
-        android:layout_width="439dp"
-        android:layout_height="245dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="120dp"
-        android:background="@android:color/white"
+        android:layout_width="367dp"
+        android:layout_height="302dp"
+        android:background="#FAF8F5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.031" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="448dp"
-        android:layout_height="246dp"
+        android:layout_width="361dp"
+        android:layout_height="299dp"
 
-        android:layout_marginStart="12dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="121dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="304dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="44dp"
         android:elevation="3dp"
         android:text="Back"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.806" />
 
     <Button
         android:id="@+id/showListButton"
-        android:layout_width="130dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="240dp"
+        android:layout_width="140dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="24dp"
         android:elevation="3dp"
         android:text="Show List"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whiteFrame"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="102dp"
-        android:layout_height="47dp"
+        android:layout_width="122dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="28dp"
         android:elevation="3dp"
         android:text="Save"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toEndOf="@+id/showListButton"
+        app:layout_constraintHorizontal_bias="0.591"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,6 @@
         </activity>
         <activity android:name=".ImageActivity"></activity>
         <activity android:name=".SavedImagesActivity"></activity>
-        <activity android:name=".ImageDisplayActivity" />
         <activity android:name=".ImageDetailsActivity" />
 
 

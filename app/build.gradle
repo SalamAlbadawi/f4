@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+
     namespace 'algonquin.cst2335.f4'
     compileSdk 33
 
